@@ -35,11 +35,11 @@ class SenderApplicationTests {
         SenderResult result = zabbixSender.send(dataObject);
 
         System.out.println("result:" + result);
-//        if (result.success()) {
-//            System.out.println("send success.");
-//        } else {
-//            System.err.println("sned fail!");
-//        }
+        if (result.success()) {
+            System.out.println("send success.");
+        } else {
+            System.err.println("sned fail!");
+        }
     }
 
 }
