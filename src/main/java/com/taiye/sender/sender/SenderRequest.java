@@ -23,7 +23,7 @@ public class SenderRequest {
         byte[] jsonBytes = JSON.toJSONBytes(this);
 
         byte[] result = new byte[header.length + 4 + 4 + jsonBytes.length];
-
+        //把一个数组某一段字节数据放到另一段数组中
         System.arraycopy(header, 0, result, 0, header.length);
 
         result[header.length] = (byte) (jsonBytes.length & 0xFF);

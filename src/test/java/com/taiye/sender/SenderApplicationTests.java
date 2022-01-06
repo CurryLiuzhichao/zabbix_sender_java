@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
 @SpringBootTest
 class SenderApplicationTests {
@@ -21,7 +23,7 @@ class SenderApplicationTests {
         //要发送到的server端IP以及端口号
         String host = "192.168.0.25";
         int port = 10051;
-        Sender zabbixSender = new Sender(host, port);
+        Sender Sender = new Sender(host, port);
 
         DataObject dataObject = new DataObject();
         //在系统中显示的主机名
@@ -30,9 +32,9 @@ class SenderApplicationTests {
         dataObject.setKey("test_item");
         //需要发送的值
         dataObject.setValue("10");
-        // TimeUnit is SECONDS.
+        // 时间戳是秒
         dataObject.setClock(System.currentTimeMillis()/1000);
-        SenderResult result = zabbixSender.send(dataObject);
+        SenderResult result = Sender.send(dataObject);
 
         System.out.println("result:" + result);
         if (result.success()) {
@@ -40,6 +42,52 @@ class SenderApplicationTests {
         } else {
             System.err.println("sned fail!");
         }
+    }
+
+    @Test
+    public void sendList() throws IOException {
+        //要发送到的server端IP以及端口号
+        String host = "192.168.0.25";
+        int port = 10051;
+
+        ArrayList<DataObject> dataObjects = new ArrayList();
+
+        for (int i = 0; i<= 10;i++ ){
+            DataObject dataObject = new DataObject();
+            //在系统中显示的主机名
+            dataObject.setHost("lzc");
+            //在系统中设置的键值
+            dataObject.setKey("test_item");
+            //需要发送的值
+            dataObject.setValue(String.valueOf(new Random(100)));
+            // 时间戳是秒
+            dataObject.setClock(System.currentTimeMillis()/1000);
+            dataObjects.add(dataObject);
+        }
+
+
+//        DataObject dataObject = new DataObject();
+//        //在系统中显示的主机名
+//        dataObject.setHost("lzc");
+//        //在系统中设置的键值
+//        dataObject.setKey("test_item");
+//        //需要发送的值
+//        dataObject.setValue("12");
+//        // 时间戳是秒
+//        dataObject.setClock(System.currentTimeMillis()/1000);
+//        dataObjects.add(dataObject);
+//        DataObject dataObject1 = new DataObject();
+//        dataObject1.setHost("lzc");
+//        dataObject1.setKey("test_item");
+//        dataObject1.setValue("14");
+//        dataObject1.setClock(System.currentTimeMillis()/1000);
+//        dataObjects.add(dataObject1);
+
+        Sender Sender = new Sender(host, port);
+
+        SenderResult result = Sender.send(dataObjects);
+        System.out.println(result);
+
     }
 
 }
