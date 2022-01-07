@@ -59,29 +59,14 @@ class SenderApplicationTests {
             //在系统中设置的键值
             dataObject.setKey("test_item");
             //需要发送的值
-            dataObject.setValue(String.valueOf(new Random(100)));
+            Random r = new Random();
+            dataObject.setValue(String.valueOf(r.nextInt(10)));
+            System.out.println(dataObject.getValue());
             // 时间戳是秒
             dataObject.setClock(System.currentTimeMillis()/1000);
             dataObjects.add(dataObject);
         }
 
-
-//        DataObject dataObject = new DataObject();
-//        //在系统中显示的主机名
-//        dataObject.setHost("lzc");
-//        //在系统中设置的键值
-//        dataObject.setKey("test_item");
-//        //需要发送的值
-//        dataObject.setValue("12");
-//        // 时间戳是秒
-//        dataObject.setClock(System.currentTimeMillis()/1000);
-//        dataObjects.add(dataObject);
-//        DataObject dataObject1 = new DataObject();
-//        dataObject1.setHost("lzc");
-//        dataObject1.setKey("test_item");
-//        dataObject1.setValue("14");
-//        dataObject1.setClock(System.currentTimeMillis()/1000);
-//        dataObjects.add(dataObject1);
 
         Sender Sender = new Sender(host, port);
 
